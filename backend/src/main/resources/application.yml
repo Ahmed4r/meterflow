@@ -1,0 +1,49 @@
+server:
+  port: 8080
+  error:
+    include-message: never
+spring:
+  application:
+    name: meterflow
+  datasource:
+    url: ${DATABASE_URL:jdbc:postgresql://localhost:55432/meterflow}
+    username: ${DATABASE_USER:meterflow}
+    password: ${DATABASE_PASSWORD}
+  jpa:
+    open-in-view: false
+    hibernate:
+      ddl-auto: validate
+  data:
+    redis:
+      host: ${REDIS_HOST:localhost}
+      port: ${REDIS_PORT:6379}
+      timeout: 2s
+  jackson:
+    deserialization:
+      fail-on-unknown-properties: true
+  mvc:
+    problemdetails:
+      enabled: true
+logging:
+  structured:
+    format:
+      console: ecs
+  level:
+    org.hibernate: WARN
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health
+  endpoint:
+    health:
+      show-details: never
+meterflow:
+  jwt-secret: ${JWT_SECRET}
+  origin: ${APP_ORIGIN:http://localhost:3000}
+  secure-cookie: ${SECURE_COOKIE:true}
+  demo: ${DEMO_SEED:false}
+  retention-days: ${RETENTION_DAYS:400}
+  ai-key: ${GROQ_API_KEY:}
+  ai-model: ${AI_MODEL:openai/gpt-oss-120b}
+  ai-base-url: https://api.groq.com/openai/v1

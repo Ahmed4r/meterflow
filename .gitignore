@@ -1,0 +1,12 @@
+.env
+.tools/
+**/target/
+**/node_modules/
+**/.next/
+**/test-results/
+*.log
+.idea/
+*.tsbuildinfo
+*.dump
+cookies.txt
+frontend/playwright-report/
